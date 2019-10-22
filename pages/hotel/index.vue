@@ -9,10 +9,10 @@
         </div>
 
         <!-- 目的地酒店搜索工具栏 -->
-        <SearchBar />
+        <SearchBar @getCityScenics="getCityScenics"/>
 
         <!-- 介绍信息&地图组件 -->
-        <InfoMap />
+        <InfoMap :scenics="scenics"/>
 
         <!-- 酒店列表过滤器 -->
         <ListFilter />
@@ -58,13 +58,20 @@ export default {
             pageSize: 4, // 每页显示个数
             total: 4,     // 酒店总个数
             hotel:[],
-
+            scenics: [] //城市景点数组
         }
 
     },
     mounted() {
         this.getList()
     },
+
+    watch:{
+        $route(){
+            this.getList();
+        }
+    },
+
     methods:{
         // 改变每页显示个数时触发
         handleSizeChange(val) {
@@ -90,8 +97,12 @@ export default {
 
             this.hotel = data
             this.total = total
-            console.log(res.data);
         })
+        },
+
+        // 从酒店搜索栏子组件获取城市景点
+        getCityScenics(scenics){
+            this.scenics = scenics;
         }
     },
     // 注册

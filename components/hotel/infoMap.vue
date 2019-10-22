@@ -10,10 +10,11 @@
                 </el-col>
                 <el-col :span="21">
                         <div class="area-info" :class="{ 'hidden': isHidden }">
-                            <span class="area-info-all">全部</span> <a href="#">镇兴路沿线</a><a href="#">视觉艺术学院</a><a href="#">大成名店</a><a href="#">南京西站</a><a href="#">铜山镇</a><a href="#">大桥南路</a><a href="#">宝塔路沿线</a><a href="#">宝塔路/万辰苏果</a><a href="#">珠江路沿线</a><a href="#">华侨城</a><a href="#">江浦东屏镇</a><a href="#">南京南站/明发</a><a href="#">北岭路沿线</a><a href="#">苜蓿园</a><a href="#">弘阳广场/新一城</a><a href="#">新街口地区</a><a href="#">紫金山/孝陵卫</a><a href="#">火车站/玄武湖</a><a href="#">东坝镇</a><a href="#">禄口机场</a><a href="#">奥体中心</a><a href="#">雨润大街</a><a href="#">新模范马路</a><a href="#">将军山</a><a href="#">国际慢城</a><a href="#">云鼎时尚街区</a><a href="#">百家湖</a><a href="#">湖南路</a><a href="#">竹山路沿线</a><a href="#">南大/南师大</a><a href="#">江宁滨江开发区</a><a href="#">湖熟镇</a><a href="#">南大和园</a><a href="#">君临紫金商业街</a><a href="#">大西门</a><a href="#">建邺万达</a><a href="#">江宁科学园</a><a href="#">顾家欧亚达</a><a href="#">高淳老街谷里</a><a href="#">汤山镇</a><a href="#">雄州</a>
+                            <span class="area-info-all">全部</span>
+                            <a href="#" v-for="(item,index) in scenics" :key="index">{{item.name}}</a>
                         </div>
                         <i @click="handleHidden">
-                            <span class="el-icon-arrow-down icon_arrow_down"></span>等43个区域
+                            <span class="el-icon-arrow-down icon_arrow_down"></span>等{{scenics.length}}个区域
                         </i>
                 </el-col>
             </el-row>
@@ -89,6 +90,12 @@
 
 <script>
 export default {
+    props:{
+        scenics:{
+            type: Array,
+            default: []
+        }
+    },
 
     data(){
         return {
