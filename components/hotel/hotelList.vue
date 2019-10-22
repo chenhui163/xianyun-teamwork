@@ -4,23 +4,23 @@
         <el-row class="hotel-list">
             <!-- 图片部分 -->
             <el-col class="img" :span="8">
-                 <el-image src="https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg"></el-image>
+                 <el-image class="imgs" :src="item.photos"></el-image>
             </el-col>
 
             <!-- 酒店信息 -->
             <el-col class="info" :span="16">
                 <el-col class="info-text" :span="15">
-                    <h3>好来阁商务宾馆</h3>
+                    <h3>{{item.name}}</h3>
                     <p class="hotel-type">
-                        hao lai ge shang wu hotel
+                        {{item.alias}}
                         <el-tooltip class="item" effect="dark" content="3星级" placement="top-start">
                             <span>
                                 <i class="el-icon-star-on"></i>
-                                <i class="el-icon-star-on"></i>
+                                <i class="el-icon-star-on"></i> 
                                 <i class="el-icon-star-on"></i>
                             </span>
                         </el-tooltip>
-                        经济型
+                        {{item.hoteltype.name}}
                     </p>
                     <p class="hotel-comment">
                         <!-- 评分星星显示部分 -->
@@ -34,7 +34,7 @@
                                <i class="el-icon-star-off"></i>
                             </span>
                             <!-- 评分的星星，高亮 -->
-                            <span class="start-on" style="width: 50%;">
+                            <span class="start-on" :style="`width: ${item.stars*20}%;`">
                                <i class="el-icon-star-off"></i>
                                <i class="el-icon-star-off"></i>
                                <i class="el-icon-star-off"></i>
@@ -42,85 +42,42 @@
                                <i class="el-icon-star-off"></i>
                             </span> 
                         </span>
-                        <em class="comment-score" :span="4"><i class="color-orangered">3.5分</i></em>
-                        <em class="comment-count" :span="5"><i class="color-orangered">62</i>条评价</em>
-                        <em class="comment-travel" :span="5"><i class="color-orangered">22</i>篇游记</em>
+                        <em class="comment-score" :span="4"><i class="color-orangered">{{item.stars}}分</i></em>
+                        <em class="comment-count" :span="5"><i class="color-orangered">{{item.all_remarks}}</i>条评价</em>
+                        <em class="comment-travel" :span="5"><i class="color-orangered">{{item.common_remark}}</i>篇游记</em>
                     </p>
                     <p class="comment-location">
                         <span class="el-icon-location"></span>
-                        位于: 高淳县淳溪镇镇兴路118号(高淳县委党校对面)
+                        位于: {{item.address}}
                     </p>
                 </el-col>
                 <el-col class="info-price" :span="9">
-                    <div class="price-row">
-                        <p>携程</p>
+                    <div class="price-row" v-for="(v,i) in item.products" :key="i">
+                        <p>{{v.name}}</p>
                         <p>
-                            <span class="price">￥100</span>起
+                            <span class="price">￥{{v.price}}</span>起
                             <i class="el-icon-arrow-right"></i>
                         </p>
                     </div>
-                    <div class="price-row">
-                        <p>艺龙</p>
-                        <p>
-                            <span class="price">￥60</span>起
-                            <i class="el-icon-arrow-right"></i>
-                        </p>
-                    </div>
-                    <div class="price-row">
-                        <p>Hotels.com</p>
-                        <p>
-                            <span class="price">￥40</span>起
-                            <i class="el-icon-arrow-right"></i>
-                        </p>
-                    </div>
+                    
                 </el-col>
             </el-col>
         </el-row>
 
-        <!-- 分页 -->
-        <!-- 
-            size-change：改变当前页显示个数
-            current-change：改变当前页下标时触发
-            current-page：相当于pageIndex
-            page-size：相当于pageSize
-            page-sizes：选择显示多少页的数组
-         -->
-        <el-pagination
-            class="list-page"
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-            :current-page="pageIndex"
-            :page-sizes="[10, 20, 30, 40]"
-            :page-size="pageSize"
-            layout="total, sizes, prev, pager, next, jumper"
-            :total="total"
-        >
-        </el-pagination>
     </div>
 </template>
 
 <script>
 export default {
-
-    data(){
-
-        return {
-            pageIndex: 1, // 当前页码
-            pageSize: 10, // 每页显示个数
-            total: 0,     // 酒店总个数
+    props:{
+        item:{
+            type: Object,
+            // 默认是空对象      
+            default: {}    
         }
-
     },
-
     methods: {
-        // 改变每页显示个数时触发
-        handleSizeChange(val) {
-            console.log(`每页 ${val} 条`);
-        },
-        // 改变当前页下标时触发
-        handleCurrentChange(val) {
-            console.log(`当前页: ${val}`);
-        }
+
     }
 
 }
@@ -138,6 +95,10 @@ export default {
         .img{
             box-sizing: border-box;
             padding: 0 10px;
+            .imgs{
+                width: 313px;
+                height: 209px;
+            }
         }
 
         /* 酒店信息 */
@@ -237,10 +198,5 @@ export default {
         }
     }
 
-    /* 分页 */
-    .list-page{
-        margin-bottom: 50px;
-        text-align: right;
-    }
 
 </style>
