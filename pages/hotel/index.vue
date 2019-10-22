@@ -4,7 +4,7 @@
         <div class="breadcrumb">
             <el-breadcrumb separator-class="el-icon-arrow-right">
                 <el-breadcrumb-item>酒店</el-breadcrumb-item>
-                <el-breadcrumb-item>南京市酒店预订</el-breadcrumb-item>
+                <el-breadcrumb-item>{{city}}酒店预订</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
 
@@ -58,7 +58,8 @@ export default {
             pageSize: 4, // 每页显示个数
             total: 4,     // 酒店总个数
             hotel:[],
-            scenics: [] //城市景点数组
+            scenics: [], //城市景点数组
+            city: ""     //城市名称
         }
 
     },
@@ -101,8 +102,9 @@ export default {
         },
 
         // 从酒店搜索栏子组件获取城市景点
-        getCityScenics(scenics){
+        getCityScenics(scenics,city){
             this.scenics = scenics;
+            this.city = `${city}市`;
         }
     },
     // 注册

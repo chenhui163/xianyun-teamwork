@@ -187,7 +187,7 @@ export default {
                 this.form.city.scenics = res.data.data[0].scenics;
 
                 // 把景点数据数组发送回父组件
-                this.$emit("getCityScenics", this.form.city.scenics);
+                this.$emit("getCityScenics", this.form.city.scenics,this.form.city.value);
             })
 
             // 请求酒店数据
@@ -251,7 +251,7 @@ export default {
                 this.form.city.scenics = res.data.data[0].scenics;
 
                 // 把景点数据数组发送回父组件
-                this.$emit("getCityScenics", this.form.city.scenics);
+                this.$emit("getCityScenics", this.form.city.scenics,this.form.city.value);
             })
         }
     }
