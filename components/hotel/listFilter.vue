@@ -18,21 +18,11 @@
                     <i class="el-icon-arrow-down el-icon--right"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown" style="width:150px">
-                    <el-dropdown-item>
-                        <el-checkbox style="width:100%">1星</el-checkbox>
+
+                    <el-dropdown-item v-for="(item,index) in filter.levels" :key="index">
+                        <el-checkbox style="width:100%">{{item.name}}</el-checkbox>
                     </el-dropdown-item>
-                    <el-dropdown-item>
-                        <el-checkbox style="width:100%">2星</el-checkbox>
-                    </el-dropdown-item>
-                    <el-dropdown-item>
-                        <el-checkbox style="width:100%">3星</el-checkbox>
-                    </el-dropdown-item>
-                    <el-dropdown-item>
-                        <el-checkbox style="width:100%">4星</el-checkbox>
-                    </el-dropdown-item>
-                    <el-dropdown-item>
-                        <el-checkbox style="width:100%">5星</el-checkbox>
-                    </el-dropdown-item>
+
                 </el-dropdown-menu>
             </el-dropdown>
         </div>
@@ -46,21 +36,11 @@
                     <i class="el-icon-arrow-down el-icon--right"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown" style="width:150px">
-                    <el-dropdown-item>
-                        <el-checkbox style="width:100%">经济型</el-checkbox>
+
+                    <el-dropdown-item v-for="(item,index) in filter.types" :key="index">
+                        <el-checkbox style="width:100%">{{item.name}}</el-checkbox>
                     </el-dropdown-item>
-                    <el-dropdown-item>
-                        <el-checkbox style="width:100%">舒适型</el-checkbox>
-                    </el-dropdown-item>
-                    <el-dropdown-item>
-                        <el-checkbox style="width:100%">高档型</el-checkbox>
-                    </el-dropdown-item>
-                    <el-dropdown-item>
-                        <el-checkbox style="width:100%">豪华型</el-checkbox>
-                    </el-dropdown-item>
-                    <el-dropdown-item>
-                        <el-checkbox style="width:100%">度假村</el-checkbox>
-                    </el-dropdown-item>
+
                 </el-dropdown-menu>
             </el-dropdown>
         </div>
@@ -74,21 +54,11 @@
                     <i class="el-icon-arrow-down el-icon--right"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown" style="width:150px">
-                    <el-dropdown-item>
-                        <el-checkbox style="width:100%">wifi</el-checkbox>
+
+                    <el-dropdown-item  v-for="(item,index) in filter.assets" :key="index">
+                        <el-checkbox style="width:100%">{{item.name}}</el-checkbox>
                     </el-dropdown-item>
-                    <el-dropdown-item>
-                        <el-checkbox style="width:100%">吹风机</el-checkbox>
-                    </el-dropdown-item>
-                    <el-dropdown-item>
-                        <el-checkbox style="width:100%">外币兑换服务</el-checkbox>
-                    </el-dropdown-item>
-                    <el-dropdown-item>
-                        <el-checkbox style="width:100%">洗衣服务</el-checkbox>
-                    </el-dropdown-item>
-                    <el-dropdown-item>
-                        <el-checkbox style="width:100%">电梯</el-checkbox>
-                    </el-dropdown-item>
+                    
                 </el-dropdown-menu>
             </el-dropdown>
         </div>
@@ -101,22 +71,12 @@
                     不限
                     <i class="el-icon-arrow-down el-icon--right"></i>
                 </span>
-                <el-dropdown-menu slot="dropdown" style="width:150px">
-                    <el-dropdown-item>
-                        <el-checkbox>7天</el-checkbox>
+                <el-dropdown-menu slot="dropdown" style="width:180px; overflow-y: scroll; height:230px">
+
+                    <el-dropdown-item   v-for="(item,index) in filter.brands" :key="index">
+                        <el-checkbox style="width:100%">{{item.name}}</el-checkbox>
                     </el-dropdown-item>
-                    <el-dropdown-item>
-                        <el-checkbox>汉庭</el-checkbox>
-                    </el-dropdown-item>
-                    <el-dropdown-item>
-                        <el-checkbox>如家</el-checkbox>
-                    </el-dropdown-item>
-                    <el-dropdown-item>
-                        <el-checkbox>格林豪泰</el-checkbox>
-                    </el-dropdown-item>
-                    <el-dropdown-item>
-                        <el-checkbox>99旅馆</el-checkbox>
-                    </el-dropdown-item>
+                
                 </el-dropdown-menu>
             </el-dropdown>
         </div>
@@ -135,10 +95,19 @@ export default {
                 assets: [], // 酒店设施
                 brands: [] // 酒店品牌
             },
-            hotel_grade: "不限"
+            hotel_grade: "不限",
+            filter:{},
         };
     },
-    methods: {}
+    methods: {},
+    mounted(){
+        this.$axios({
+            url:'/hotels/options',
+        }).then(res=>{
+            this.filter = res.data.data
+            console.log(this.filter);
+        })
+    }
 };
 </script>
 
