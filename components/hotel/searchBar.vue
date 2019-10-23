@@ -3,7 +3,7 @@
         <el-form class="hotel-search-bar">
             <el-form-item style="padding-right:10px">
                 <el-autocomplete
-                    v-model="form.destination"
+                    v-model="form.city.value"
                     class="inline-input"
                     placeholder="请输入内容"
                     :fetch-suggestions="queryDestSearch"
@@ -148,6 +148,20 @@ export default {
     },
 
     methods: {
+
+        // 请求旅游景点
+        getTravel(){
+            // 请求旅游景点
+            this.$axios({
+                url: "/cities?name=" + this.form.city.value
+            }).then(res=>{
+                // 将景点赋值到城市对象中
+                this.form.city.scenics = res.data.data[0].scenics;
+
+                // 把景点数据数组发送回父组件
+                this.$emit("getCityScenics", this.form.city.scenics,this.form.city.value);
+            })
+        },
         
         // 输入目的地提示市名称
         queryDestSearch(value,cb){
@@ -179,28 +193,21 @@ export default {
             this.form.city.id = item.id;
 
             // 请求旅游景点
-            this.$axios({
-                url: "/cities?name=" + this.form.city.value
-            }).then(res=>{
-                console.log(res.data.data[0].scenics)
-                // 将景点赋值到城市对象中
-                this.form.city.scenics = res.data.data[0].scenics;
+            this.getTravel();
 
-                // 把景点数据数组发送回父组件
-                this.$emit("getCityScenics", this.form.city.scenics,this.form.city.value);
-            })
-
-            // 请求酒店数据
+            // 改变url的城市id
             this.$router.push({
                 path:"/hotel",
                 query:{
-                    city:item.id
+                    city:this.form.city.id
                 }
             })
         },
 
         // 目的地输入框失去焦点时触发
         handleBlur(){
+            if(!this.form.city.value) return;
+
             // 获取表单需要的数据，目的地的城市id和名称
             this.form.city.value = this.cities[0].value;
             this.form.city.id = this.cities[0].id;
@@ -233,25 +240,22 @@ export default {
             const enterTime = this.form.date[0];    // 入住时间
             const leftTime = this.form.date[1];     // 离店时间
 
-            this.$router.push({
-                path:"/hotel",
-                query:{
-                    city,
-                    enterTime,
-                    leftTime
-                }
-            })
+            let query = {
+                city
+            }
+
+            if(this.form.date[0]&&this.form.date[1]){
+                query.enterTime = enterTime;
+                query.leftTime = leftTime;
+            }
 
             // 请求旅游景点
-            this.$axios({
-                url: "/cities?name=" + this.form.city.value
-            }).then(res=>{
-                console.log(res.data.data[0].scenics)
-                // 将景点赋值到城市对象中
-                this.form.city.scenics = res.data.data[0].scenics;
+            this.getTravel();
 
-                // 把景点数据数组发送回父组件
-                this.$emit("getCityScenics", this.form.city.scenics,this.form.city.value);
+            // 改变url
+            this.$router.push({
+                path:"/hotel",
+                query
             })
         }
     }

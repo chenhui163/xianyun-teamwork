@@ -12,7 +12,7 @@
         <SearchBar @getCityScenics="getCityScenics"/>
 
         <!-- 介绍信息&地图组件 -->
-        <InfoMap :scenics="scenics"/>
+        <InfoMap :scenics="scenics" :hotel="hotel"/>
 
         <!-- 酒店列表过滤器 -->
         <ListFilter />
@@ -57,7 +57,7 @@ export default {
             pageIndex: 1, // 当前页码
             pageSize: 4, // 每页显示个数
             total: 4,     // 酒店总个数
-            hotel:[],
+            hotel:[],       // 酒店列表
             scenics: [], //城市景点数组
             city: ""     //城市名称
         }
@@ -65,6 +65,7 @@ export default {
     },
     mounted() {
         this.getList()
+        // console.log(this.hotel)
     },
 
     watch:{
@@ -95,8 +96,7 @@ export default {
             }
         }).then(res=>{
             const {data,total} = res.data
-
-            this.hotel = data
+            this.hotel = [...data]   // 每次请求数据，酒店列表都会更新
             this.total = total
         })
         },

@@ -94,6 +94,10 @@ export default {
         scenics:{
             type: Array,
             default: []
+        },
+        hotel:{
+            type: Array,
+            default: []
         }
     },
 
@@ -104,45 +108,53 @@ export default {
         }
     },
 
+    watch:{
+        hotel(){
+            setTimeout(() => {
+                this.getLocation();
+            }, 200);
+        }
+    },
+
     methods:{
 
         // 鼠标点击给 介绍部分-区域-区域信息 隐藏产出部分
         handleHidden(){
             this.isHidden = !this.isHidden;
+        },
+
+        // 获取地图标记
+        getLocation(){
+            /* 地图部分js代码 */
+            var map = new AMap.Map('container', {
+                resizeEnable: true,
+                center:[this.hotel[2].location.longitude, this.hotel[2].location.latitude],  // 中心点坐标
+                zoom:8
+            });
+
+            this.hotel.forEach(v => {
+                var marker = new AMap.Marker({
+                    position: new AMap.LngLat(v.location.longitude, v.location.latitude),
+                    title: v.name
+                });
+                map.add(marker);
+            });
         }
 
     },
 
     mounted(){
-        window.onLoad  = function(){
+        window.onLoad  = ()=>{
+            
+            this.getLocation();
 
-            /* 地图部分js代码 */
-
-            var map = new AMap.Map('container', {
-                resizeEnable: true,
-                center:[113.264359, 23.12908],  // 中心点坐标
-                zoom:15
-            });
-
-
-            // 创建一个 Marker 实例：
-            var marker = new AMap.Marker({
-                position: new AMap.LngLat(113.26435363558198, 23.129065200285243),    // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
-                title: '北京'
-            });
-
-            // 将创建的点标记添加到已有的地图实例：
-            map.add(marker);
-
-            // 创建一个 Marker 实例：
-            var marker2 = new AMap.Marker({
-                position: new AMap.LngLat(113.26648867395784, 23.13242962690394),    // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
-                title: '北京'
-            });
-
-            // 将创建的点标记添加到已有的地图实例：
-            map.add(marker2);
-
+            // // 创建一个 Marker 实例：
+            // var marker = new AMap.Marker({
+            //     position: new AMap.LngLat(113.26435363558198, 23.129065200285243),    // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
+            //     title: '北京'
+            // });
+            // // 将创建的点标记添加到已有的地图实例：
+            // map.add(marker);
         }
 
         var url = 'https://webapi.amap.com/maps?v=1.4.15&key=84d0212fd924d073ed43991d7bcaa7a8&callback=onLoad';
