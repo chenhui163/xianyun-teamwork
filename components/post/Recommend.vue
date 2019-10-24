@@ -42,6 +42,7 @@ export default {
   width: 100%;
   height: 80px;
   border-bottom: 1px solid #999;
+  cursor: pointer;
   .card-img {
     margin-right: 10px;
     img {

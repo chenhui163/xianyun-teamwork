@@ -34,11 +34,39 @@
       "unicode_decimal": 58891
     },
     {
+      "icon_id": "5171735",
+      "name": "钱",
+      "font_class": "qian",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "5197222",
+      "name": "沙发",
+      "font_class": "shafa",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
       "icon_id": "5972798",
       "name": "皇冠",
       "font_class": "huangguan",
       "unicode": "e60e",
       "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "8679374",
+      "name": "搜索",
+      "font_class": "sousuo",
+      "unicode": "e688",
+      "unicode_decimal": 59016
+    },
+    {
+      "icon_id": "10143467",
+      "name": "用户",
+      "font_class": "yonghu",
+      "unicode": "e611",
+      "unicode_decimal": 58897
     }
   ]
 }

@@ -10,13 +10,15 @@
       <!-- 攻略内容 -->
       <el-col :span="17" class="left">
         <div class="aside">
-          <PostContent></PostContent>
+          <PostContent v-loading="loading"></PostContent>
         </div>
 
         <!-- 评论部分 -->
-        <div class="comment">
+        <div class="comment" v-if="recommend">
+          
           <Comment></Comment>
         </div>
+      
       </el-col>
 
       <!--攻略推荐  -->
@@ -43,7 +45,8 @@ export default {
   },
   data() {
     return {
-      recommend: {}
+      recommend: {},
+      loading: true
     };
   },
 
@@ -56,8 +59,10 @@ export default {
     }).then(res => {
       const { data } = res.data;
       this.recommend = data;
-      // console.log(this.recommend);
     });
+    setTimeout(() => {
+      this.loading = false
+    }, 800);
   },
 
   methods: {}
@@ -65,23 +70,22 @@ export default {
 </script>
 
 <style scoped lang="less">
-
 .left {
-    margin-right: 30px;
+  margin-right: 30px;
+}
+.contianer {
+  padding: 20px;
+  width: 1000px;
+  margin: 20px auto;
+  .aside {
+    margin-top: 20px;
   }
-  .contianer {
-    padding: 20px;
-    width: 1000px;
-    margin: 20px auto;
-    .aside {
-      margin-top: 20px;
-    }
-    .recommend {
-      .top {
-        font-size: 18px;
-        width: 100%;
-        padding-bottom: 10px;
-      }
+  .recommend {
+    .top {
+      font-size: 18px;
+      width: 100%;
+      padding-bottom: 10px;
     }
   }
+}
 </style>

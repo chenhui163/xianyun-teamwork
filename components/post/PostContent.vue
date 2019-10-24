@@ -21,7 +21,7 @@
         <i class="iconfont icontuding">&#xe60b;</i>
         <p>分享</p>
       </div>
-      <div class="like option-item" :class="{active: posts.like === 5||2 }">
+      <div class="like option-item" :class="{active: posts.like }">
         <i class="iconfont icontuding" @click="handlelike(posts.id)">&#xe615;</i>
         <p>点赞({{posts.like}})</p>
       </div>
@@ -40,11 +40,10 @@ export default {
 
   mounted() {
     this.getpost();
-
   },
 
-  watch: {
-    $route() {
+  watch:{
+    $route(){
       this.getpost(); 
     }
   },
@@ -58,13 +57,11 @@ export default {
       }).then(res => {
         this.posts = res.data;
         this.star  =JSON.stringify(res.data.account.starPosts) 
-        console.log(this.posts)
 
       });
     },
     // 收藏功能
     handlestar(id) {
-      // console.log("收藏功能");
       this.$axios({
         url: "/posts/star",
         params: {
@@ -77,6 +74,7 @@ export default {
         if (res.status === 0 || res.message === "已收藏") {
           JSON.parse(this.star).push(this.posts.id)
         }
+        this.getpost()
       });
     },
     //点赞功能
@@ -91,9 +89,8 @@ export default {
           Authorization: `Bearer ${this.$store.state.user.userInfo.token}`
         }
       }).then(res => {
-        console.log(res);
         if (res.status === 200) {
-          this.like === 1;
+          this.getpost()
         }
       });
     }

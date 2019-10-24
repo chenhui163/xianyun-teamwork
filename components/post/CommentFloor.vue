@@ -86,8 +86,9 @@ export default {
     .pics {
       display: flex;
       img {
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
+          padding-right: 10px;
       }
     }
     i {
