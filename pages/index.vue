@@ -39,8 +39,8 @@
                     align="middle" 
                     class="search-input"
                 >
-                    <input :placeholder="options[current].placeholder"/>
-                    <i class="el-icon-search"></i>
+                    <input :placeholder="options[current].placeholder" v-model="search"/>
+                    <i class="el-icon-search" @click="handleCheckPrice"></i>
                 </el-row>
             </div>
         </div>
@@ -63,7 +63,9 @@ export default {
             ],
 
             // 当前选中的项的索引值
-            current: 0
+            current: 0,
+            search:'', //搜索框
+            searchReturn:[] //搜索返回结果
         }
     },
 
@@ -87,6 +89,27 @@ export default {
             if(this.options[this.current].type==="机票"){
                 this.$router.push("/air");
             }
+            
+        },
+        handleCheckPrice(){
+            if(this.options[this.current].type==="酒店"){
+                
+                this.$axios({
+                    url:'/cities?name='+this.search,
+                }).then(res=>{
+                    this.searchReturn = res.data.data
+                    console.log(res);
+                    const city = this.searchReturn[0].name.replace('市','')
+
+                    this.$router.push({
+                        path:"/hotel",
+                        query:{
+                            city
+                        }
+                    })
+                })
+            }
+            
         }
     }
 
