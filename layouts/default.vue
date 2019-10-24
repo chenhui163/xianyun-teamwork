@@ -27,6 +27,7 @@ export default {
 </script>
 
 <style lang="less">
+@import "@/static/icon/iconfont.css";
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;
