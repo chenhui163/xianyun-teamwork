@@ -83,7 +83,7 @@ export default {
             const id = this.item.id
 
             this.$router.push({
-                path: '/hotelDetail',
+                path: '/hotel/hotelDetail',
                 query:{
                     cityId,
                     id
@@ -99,7 +99,7 @@ export default {
 
     /* 酒店列表 */
     .hotel-list{
-        margin-bottom: 20px;
+        // margin-bottom: 20px;
         padding: 25px 0;
         border-bottom: 1px solid #eeeeee;
 

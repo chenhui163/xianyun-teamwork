@@ -99,7 +99,8 @@ export default {
                 }).then(res=>{
                     this.searchReturn = res.data.data
                     console.log(res);
-                    const city = this.searchReturn[0].name.replace('市','')
+                    // const city = this.searchReturn[0].name.replace('市','')
+                    const city = this.searchReturn[0].id
 
                     this.$router.push({
                         path:"/hotel",
