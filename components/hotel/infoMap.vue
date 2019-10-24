@@ -81,7 +81,7 @@
 
         <!-- 地图部分 -->
         <el-col class="map" :span="10">
-            <div id="container"></div> 
+            <div id="container" v-loading="loading"></div> 
         </el-col>
 
     </el-row>
@@ -104,15 +104,21 @@ export default {
     data(){
         return {
             // 判断是否隐藏的开关条件
-            isHidden: false
+            isHidden: false,
+            loading:true
         }
     },
 
     watch:{
         hotel(){
+            // 如果酒店列表数组为空，就不执行地图定位
+            if(this.hotel.length == 0){
+                return;
+            }
+
             setTimeout(() => {
                 this.getLocation();
-            }, 200);
+            }, 500);
         }
     },
 
@@ -162,6 +168,10 @@ export default {
         jsapi.charset = 'utf-8';
         jsapi.src = url;
         document.head.appendChild(jsapi);
+
+        setTimeout(() => {
+            this.loading = false
+        }, 1500);
     }
 
 }

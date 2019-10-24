@@ -146,7 +146,10 @@ export default {
     watch:{
         
     },
-
+    mounted(){
+        // 请求旅游景点
+        this.getTravel();
+    },
     methods: {
 
         // 请求旅游景点
@@ -156,7 +159,7 @@ export default {
                 url: "/cities?name=" + this.form.city.value
             }).then(res=>{
                 // 将景点赋值到城市对象中
-                this.form.city.scenics = res.data.data[0].scenics;
+                this.form.city.scenics = res.data.data[0].scenics; 
 
                 // 把景点数据数组发送回父组件
                 this.$emit("getCityScenics", this.form.city.scenics,this.form.city.value);

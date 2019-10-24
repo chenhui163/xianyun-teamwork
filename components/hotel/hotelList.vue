@@ -4,13 +4,13 @@
         <el-row class="hotel-list">
             <!-- 图片部分 -->
             <el-col class="img" :span="8">
-                 <el-image class="imgs" :src="item.photos"></el-image>
+                 <el-image class="imgs" :src="item.photos" @click="handleClick" ></el-image>
             </el-col>
 
             <!-- 酒店信息 -->
             <el-col class="info" :span="16">
                 <el-col class="info-text" :span="15">
-                    <h3>{{item.name}}</h3>
+                    <h3 @click="handleClick">{{item.name}}</h3>
                     <p class="hotel-type">
                         {{item.alias}}
                         <el-tooltip class="item" effect="dark" content="3星级" placement="top-start">
@@ -77,7 +77,19 @@ export default {
         }
     },
     methods: {
+        // 跳转到酒店详情页
+        handleClick(){
+            const cityId = this.$route.query.city 
+            const id = this.item.id
 
+            this.$router.push({
+                path: '/hotelDetail',
+                query:{
+                    cityId,
+                    id
+                }
+            })
+        }
     }
 
 }
@@ -98,6 +110,7 @@ export default {
             .imgs{
                 width: 313px;
                 height: 209px;
+                cursor: pointer;
             }
         }
 
@@ -110,6 +123,7 @@ export default {
                 h3{
                     font-size: 24px;
                     font-weight: 400;
+                    cursor: pointer;
                 }
                 .hotel-type{
                     margin-bottom: 10px;

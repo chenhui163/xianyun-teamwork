@@ -15,10 +15,10 @@
         <InfoMap :scenics="scenics" :hotel="hotel"/>
 
         <!-- 酒店列表过滤器 -->
-        <ListFilter />
+        <ListFilter @getFilterHotelList="getFilterHotelList" @getFilterPrice="getFilterPrice" />
 
         <!-- 酒店列表 -->
-        <HotelList v-for="(item,index) in hotel" :key="index" :item="item" />
+        <HotelList  v-loading="loading" v-for="(item,index) in hotel" :key="index" :item="item" v-if="item.price <= filterPrice"/>
 
         <!-- 分页 -->
         <!-- 
@@ -59,13 +59,31 @@ export default {
             total: 4,     // 酒店总个数
             hotel:[],       // 酒店列表
             scenics: [], //城市景点数组
-            city: ""     //城市名称
+            city: ""  ,   //城市名称
+            filterPrice:9999,
+            loading:true
         }
 
     },
     mounted() {
         this.getList()
         // console.log(this.hotel)
+        // 请求旅游景点
+            this.$axios({
+                url: "/cities?name=" + this.$route.query.city
+            }).then(res=>{
+                // 将景点赋值到城市对象中
+                this.scenics = res.data.data[0].scenics; 
+                const city = res.data.data[0].id; 
+                console.log(res);
+                
+                this.$router.push({
+                    path:"/hotel",
+                    query:{
+                       city
+                    }
+                })
+            })
     },
 
     watch:{
@@ -84,6 +102,7 @@ export default {
         // 改变当前页下标时触发
         handleCurrentChange(val) {
             this.pageIndex = val;
+            this.loading = true
             this.getList()
         },
         getList(){
@@ -98,6 +117,11 @@ export default {
             const {data,total} = res.data
             this.hotel = [...data]   // 每次请求数据，酒店列表都会更新
             this.total = total
+            console.log(this.hotel);
+
+            setTimeout(() => {
+                this.loading = false
+            }, 1000);
         })
         },
 
@@ -105,6 +129,13 @@ export default {
         getCityScenics(scenics,city){
             this.scenics = scenics;
             this.city = `${city}市`;
+        },
+        //筛选酒店列表
+        getFilterHotelList(data){
+            this.hotel = data
+        },
+        getFilterPrice(filterPrice){
+            this.filterPrice = filterPrice
         }
     },
     // 注册
