@@ -3,8 +3,8 @@
 
     <div class="hotel_address">
       <el-breadcrumb separator-class="el-icon-arrow-right" class="nav_bar">
-        <el-breadcrumb-item :to="{ path: '/' }">酒店</el-breadcrumb-item>
-        <el-breadcrumb-item :to="{ path: '/' }">{{hotelInfo.real_city}}酒店</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: '/hotel?city=' +cityId }">酒店</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: '/hotel?city=' +cityId }">{{hotelInfo.real_city}}酒店</el-breadcrumb-item>
         <el-breadcrumb-item>{{hotelInfo.name}}</el-breadcrumb-item>
       </el-breadcrumb>
 
@@ -162,12 +162,17 @@ export default {
     return {
       //酒店信息
       hotelInfo:{},
+      cityId:""
     }
   },
 
   mounted(){
+    const {id, cityId} = this.$route.query
+    console.log(id, cityId)
+    this.cityId = cityId;
+
     this.$axios({
-      url:"/hotels?id=5",
+      url:"/hotels?id=" + id,
     }).then(res =>{
       this.hotelInfo = res.data.data[0]
       console.log(this.hotelInfo)

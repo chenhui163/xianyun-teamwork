@@ -11,12 +11,14 @@ export default {
   //   }
   // },
   mounted() {
+
+
     let latitude = localStorage.getItem('loc_one')
     let longitude = localStorage.getItem('loc_two')
 
     window.onLoad = function() {
       var map = new AMap.Map("container", {
-        zoom: 25, //级别
+        zoom: 50, //级别
         center: [longitude, latitude], //中心点坐标
       });
 

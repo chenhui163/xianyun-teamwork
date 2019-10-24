@@ -83,7 +83,7 @@ export default {
             const id = this.item.id
 
             this.$router.push({
-                path: '/hotelDetail',
+                path: '/hotel/hotelDetail',
                 query:{
                     cityId,
                     id
