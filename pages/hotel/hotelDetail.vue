@@ -10,7 +10,7 @@
 
       <div class="title">
         <span>{{hotelInfo.name}}</span>
-        <em class="el-icon-star-on"></em><em class="el-icon-star-on"></em><em class="el-icon-star-on"></em><em class="el-icon-star-on"></em><em class="el-icon-star-on"></em>
+        <em class="iconfont">&#xe60e;</em><em class="iconfont">&#xe60e;</em><em class="iconfont">&#xe60e;</em><em class="iconfont">&#xe60e;</em><em class="iconfont">&#xe60e;</em>
         <br />
         <p>{{hotelInfo.alias}}</p>
         <br />
@@ -85,13 +85,13 @@
 
     <div class="comment">
       <div class="true_comment">
-        <h3>0条真实用户评论</h3>
+        <!-- <h3>0条真实用户评论</h3> -->
       </div>
       <el-row type="flex" class="num_code">
         <div class="num">
-          <div>总评分：{{hotelInfo.all_remarks}}</div>
-          <div>好评数：{{hotelInfo.good_remarks}}</div>
-          <div>差评数：{{hotelInfo.bad_remarks}}</div>
+          <div><span>总评分</span>：{{hotelInfo.all_remarks}}</div>
+          <div><span>好评数</span>：{{hotelInfo.good_remarks}}</div>
+          <div><span>差评数</span>：{{hotelInfo.bad_remarks}}</div>
         </div>
         <div class="code">
           <div class="code_one">
@@ -103,6 +103,8 @@
             score-template="{value}分"
             >
             </el-rate>
+            <div class="shallow"></div>
+            <div class="shallow_text">推荐</div>
           </div>
 
           <div class="code_two" v-if="hotelInfo.scores">
@@ -338,7 +340,7 @@ export default {
   }
   .hotel_info_two {
     flex-direction: column;
-    margin-bottom: 50px;
+    margin-bottom: 66px;
     div {
       height: 60px;
       line-height: 60px;
@@ -401,16 +403,45 @@ export default {
       .num {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: space-around;
         margin-right: 99px;
+        div {
+          color: #ff9900;
+          font-size: 20px;
+        }
+        span {
+          background-color: #ff9b00;
+          color: #fff;
+          padding: 4px;
+          border-radius: 4px;
+        }
       }
       .code {
         display: flex;
         .code_one {
+          position: relative;
           margin-right: 58px;
           display: flex;
           flex-direction: column;
           justify-content: center;
+          .shallow {
+            position: absolute;
+            width: 126px;
+            height: 126px;
+            border: 3px solid #ff9900;
+            border-radius: 50%;
+            left: -13px;
+            opacity:0.3; 
+          }
+          .shallow_text {
+            position: absolute;
+            font-size: 30px;
+            color: #ff9900;
+            opacity:0.3;
+            left: 23px; 
+            z-index: -999;
+            transform: rotate(-30deg)
+          }
         }
         .code_two {
           margin-right: 58px;
