@@ -14,18 +14,19 @@
 
             <el-dropdown trigger="click">
                 <span class="el-dropdown-link">
-                    请选择
+                    <span v-if="form.levels.length>0">已选{{this.form.levels.length}}项</span>
+                    <span v-else>不限</span>
                     <i class="el-icon-arrow-down el-icon--right"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown" style="width:150px">
-
-                    <el-dropdown-item>
-                        
+               
                         <el-checkbox-group v-model="form.levels">
-                            <el-checkbox style="width:100%" v-for="(item,index) in filter.levels" :key="index" :label="item.id">{{item.name}}</el-checkbox>
-                        </el-checkbox-group>
 
-                    </el-dropdown-item>
+                            <el-dropdown-item v-for="(item,index) in filter.levels" :key="index" >
+                                <el-checkbox style="width:100%" :label="item.id">{{item.name}}</el-checkbox>
+                            </el-dropdown-item>
+                            
+                        </el-checkbox-group>
 
                 </el-dropdown-menu>
             </el-dropdown>
@@ -36,19 +37,20 @@
 
             <el-dropdown trigger="click">
                 <span class="el-dropdown-link">
-                    请选择
+                    <span v-if="form.types.length>0">已选{{this.form.types.length}}项</span>
+                    <span v-else>不限</span>
                     <i class="el-icon-arrow-down el-icon--right"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown" style="width:150px">
-
-                    <el-dropdown-item>
-                        
+            
                         <el-checkbox-group v-model="form.types">
-                            <el-checkbox style="width:100%" v-for="(item,index) in filter.types" :key="index" :label="item.id">{{item.name}}</el-checkbox>
+
+                            <el-dropdown-item v-for="(item,index) in filter.types" :key="index" >
+                                <el-checkbox  style="width:100%" :label="item.id">{{item.name}}</el-checkbox>
+                            </el-dropdown-item>
+
                         </el-checkbox-group>
-
-                    </el-dropdown-item>
-
+                
                 </el-dropdown-menu>
             </el-dropdown>
         </div>
@@ -58,18 +60,19 @@
 
             <el-dropdown trigger="click">
                 <span class="el-dropdown-link">
-                    请选择
+                    <span v-if="form.assets.length>0">已选{{this.form.assets.length}}项</span>
+                    <span v-else>不限</span>
                     <i class="el-icon-arrow-down el-icon--right"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown" style="width:150px">
-
-                   <el-dropdown-item>
-                        
+ 
                         <el-checkbox-group v-model="form.assets">
-                            <el-checkbox style="width:100%" v-for="(item,index) in filter.assets" :key="index" :label="item.id">{{item.name}}</el-checkbox>
+
+                            <el-dropdown-item  v-for="(item,index) in filter.assets" :key="index">
+                                <el-checkbox style="width:100%" :label="item.id">{{item.name}}</el-checkbox>
+                            </el-dropdown-item>
+
                         </el-checkbox-group>
-                        
-                    </el-dropdown-item>
                     
                 </el-dropdown-menu>
             </el-dropdown>
@@ -80,18 +83,20 @@
 
             <el-dropdown trigger="click">
                 <span class="el-dropdown-link">
-                    请选择
+                    <span v-if="form.brands.length>0">已选{{this.form.brands.length}}项</span>
+                    <span v-else>不限</span>
                     <i class="el-icon-arrow-down el-icon--right"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown" style="width:180px; overflow-y: scroll; height:230px">
 
-                    <el-dropdown-item>
-                        
                         <el-checkbox-group v-model="form.brands">
-                            <el-checkbox style="width:100%" v-for="(item,index) in filter.brands" :key="index" :label="item.id">{{item.name}}</el-checkbox>
+
+                            <el-dropdown-item  v-for="(item,index) in filter.brands" :key="index">
+                                <el-checkbox style="width:100%" :label="item.id">{{item.name}}</el-checkbox>
+                            </el-dropdown-item>
+
                         </el-checkbox-group>
                         
-                    </el-dropdown-item>
                 
                 </el-dropdown-menu>
             </el-dropdown>
@@ -232,5 +237,11 @@ export default {
             }
         }
     }
+}
+/deep/.el-dropdown-menu__item{
+    padding: 0;
+}
+/deep/.el-checkbox__inner{
+    margin-left: 20px;
 }
 </style>
