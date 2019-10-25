@@ -146,6 +146,41 @@
           </div>
         </div>
       </div>
+      <!-- 无图片 -->
+         <div
+        class="post-main-text2"
+        v-for="(item,index) in dataList"
+        :key="index"
+        v-if="dataList[index].images.length <=0"
+      >
+        <div style="margin-left: 15px;">
+          <a href="javascript:;">
+            <h3
+              style="color:#000;"
+              class="voer-hiddle1"
+               @click="handleID(item.id,item.watch)"
+            >{{item.title}}</h3>
+          </a>
+          <a
+            href="javascript:;"
+            style="margin:15px 0;display: block; color:#888; font-size: 14px;"
+            class="voer-hiddle"
+            @click="handleID(item.id,item.watch)"
+            v-html="item.summary"></a>
+          <div
+            class="post-main-id"
+            style="font-size:14px; height: 25px;padding-right: 20px;"
+          >
+            <span class="icon el-icon-location-outline"> {{item.cityName}} by </span>
+            <a href="javascript:;"><img     
+                :src="$axios.defaults.baseURL + item.account.defaultAvatar"
+                style="left:-40px; top: -10px;height: 20px;width:20px !important;"
+              > {{item.account.nickname}}</a>
+            <em class="icon el-icon-view"> {{item.watch}}</em>
+            <span style="font-size:16px;float: right;color:orange;"><i>23 </i> 赞</span>
+          </div>
+        </div>
+      </div>
 
     </el-main>
     <el-footer style="height:25px; margin-top:10px;">
