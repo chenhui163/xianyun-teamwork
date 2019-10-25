@@ -46,10 +46,10 @@
       </div>
       <div class="comment_info" v-for="(item, index) in dataList" :key="index" v-else-if="comments">
         <div class="comment_user">
-          <img
+          <!-- <img
             :src="$axios.defaults.baseURL + item.account.defaultAvatar"
             v-if="item.account.defaultAvatar"
-          />
+          /> -->
           <span>{{item.account.nickname}}</span>
           <span class="time">{{item.datatime}}</span>
           <span class="level">{{item.level}}</span>
@@ -174,6 +174,7 @@ export default {
       }, 200);
       this.content = "";
       this.$refs.upload.clearFiles();
+      this.pics = [];
     },
 
     handleSizeChange(val) {

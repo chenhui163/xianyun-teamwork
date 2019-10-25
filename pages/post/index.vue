@@ -3,7 +3,7 @@
     <div>
 <el-aside  class="post-aside" style="overflow:visible;float: left; " >
    <div class="post-lists" style=" width:260px;">
-     <div style="padding:0 10px;" class="post-bolk">
+     <div class="post-bolk">
        <div class="post-ul">
           <div 
               class="post-list"
@@ -182,6 +182,13 @@
         </div>
       </div>
 
+<!-- 无数据 -->
+    <div
+        v-for="(item,index) in dataList"
+        :key="index"
+        v-if="dataList.length <= 0"
+      >
+      <span>该城市暂无文章</span></div>
     </el-main>
     <el-footer style="height:25px; margin-top:10px;">
        <div class="block">
@@ -322,10 +329,10 @@ getPostList(){
       url:"posts",
       params:{city}
     }).then( res => {
-        this.$router.push({
+        this.$router.an({
           path:"/post",
           query:{city}
-        }) 
+        })
         this.list = [...res.data.data]
         this.total = res.data.total
         
@@ -517,7 +524,7 @@ img{
 .post-list-bottom{
   h4{
     font-weight: 400;
-    border-bottom: 1px solid #888;
+    border-bottom: 1px solid #ddd;
     margin-top: 20px;
     padding: 10px 0;
   }
@@ -528,6 +535,7 @@ img{
 }
       .post-ul .post-list:hover {
         color: orange;
+        border-right: none;
       }
     .post-lists {
       position: relative;
@@ -537,14 +545,17 @@ img{
   }
   .post-ul{
     position: relative;
-    border: 1px solid #888;
+    border: 1px solid #ddd;
     border-bottom: none;
+    border-right: none;
     .post-list{
-      height: 25px;
-      line-height: 25px;
+      width: 92%;
+      height: 26px;
+      line-height: 26px;
       padding: 10px;
       font-size: 14px;
-      border-bottom: 1px solid #888;
+      border-bottom: 1px solid #ddd;
+      border-right: 1px solid #ddd;
       span{
         float: right;
         margin-top: 5px;
@@ -554,8 +565,9 @@ img{
     .post-right{
       position: absolute;
       top: 0px;
-      right: -340px;
-      border: 1px solid #888;
+      right: -351px;
+      border: 1px solid #ddd;
+      border-left: none;
       background: #fff;
       z-index: 10;
       width: 350px;
@@ -564,6 +576,9 @@ img{
         display: block;
         padding: 10px;
         cursor:pointer;
+        &:nth-child(5){
+          border-left: 1px solid #ddd;
+        }
         i{
           font-size: 20px;
           color: orange;
