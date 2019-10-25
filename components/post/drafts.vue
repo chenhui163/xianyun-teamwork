@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="drafts">
-      <h3>草稿箱</h3>
+      <h3>草稿箱({{$store.state.posts.postLists.length}})</h3>
       <ul>
         <li v-for="(item,index) in postList" :key="index" class="item">
           <div class="box">
