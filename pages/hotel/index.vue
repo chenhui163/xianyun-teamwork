@@ -33,7 +33,7 @@
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
             :current-page="pageIndex"
-            :page-sizes="[1, 2, 3, 4]"
+            :page-sizes="[5, 10, 15, 20]"
             :page-size="pageSize"
             layout="total, sizes, prev, pager, next, jumper"
             :total="total"
@@ -55,8 +55,8 @@ export default {
         data(){
         return {
             pageIndex: 1, // 当前页码
-            pageSize: 4, // 每页显示个数
-            total: 4,     // 酒店总个数
+            pageSize: 10, // 每页显示个数
+            total: 0,     // 酒店总个数
             hotel:[],       // 酒店列表
             scenics: [], //城市景点数组
             city: ""  ,   //城市名称
@@ -127,7 +127,8 @@ export default {
             this.total = total
             // console.log(this.hotel[0]);
             this.hotelCity = this.hotel[0]
-            console.log(this.hotel);
+            this.city = this.hotel[0].city.name;
+            console.log(this.hotelCity);
 
             setTimeout(() => {
                 this.loading = false
