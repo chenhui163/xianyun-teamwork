@@ -26,28 +26,28 @@
       <div class="picture_l">
         <!-- <img :src="$axios.defaults.baseURL + hotelInfo.pics[0].url"/> -->
         <img
-          src="https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-002.jpg"
+          src="https://desk-fd.zol-img.com.cn/t_s960x600c5/g4/M07/04/0F/ChMlzF1vGRGIdswoAAM-m0WU7P0AAXiSwHqi_AAAz6z492.jpg"
           ref="mainPic"
         />
       </div>
       <div class="picture_r">
         <div @click="changePic_a">
-          <img src="https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-002.jpg" />
+          <img src="https://desk-fd.zol-img.com.cn/t_s960x600c5/g4/M07/04/0F/ChMlzF1vGRGIdswoAAM-m0WU7P0AAXiSwHqi_AAAz6z492.jpg" />
         </div>
         <div @click="changePic_b">
-          <img src="https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-003.jpg" />
+          <img src="https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/00/0F/ChMkJ1g1WYmIdjyuAAK2AFYZK9IAAYAlQPqRpkAArYY926.jpg" />
         </div>
         <div @click="changePic_c">
-          <img src="https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-004.jpg" />
+          <img src="https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/08/00/ChMkJlafMmeISJltAAZZgNeu0joAAHfJgJka8sABlmY195.jpg" />
         </div>
         <div @click="changePic_d">
-          <img src="https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-006.jpg" />
+          <img src="https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/02/0A/ChMkJ1bKz3GINVu7AA9Ylkt9unMAALJVQFmtbQAD1iu792.jpg" />
         </div>
         <div @click="changePic_e">
-          <img src="https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-005.jpg" />
+          <img src="https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/03/02/ChMkJ1v8-QGIZsfTAA3ESBvNf6UAAtapADL5CYADcRg723.jpg" />
         </div>
         <div @click="changePic_f">
-          <img src="https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-007.jpg" />
+          <img src="http://5b0988e595225.cdn.sohucs.com/images/20180419/247f318888a64c8f800d2343e4c066d6.jpeg" />
         </div>
       </div>
     </el-row>
@@ -266,32 +266,32 @@ export default {
     changePic_a() {
       var pic = this.$refs.mainPic;
       pic.src =
-        "https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-002.jpg";
+        "https://desk-fd.zol-img.com.cn/t_s960x600c5/g4/M07/04/0F/ChMlzF1vGRGIdswoAAM-m0WU7P0AAXiSwHqi_AAAz6z492.jpg";
     },
     changePic_b() {
       var pic = this.$refs.mainPic;
       pic.src =
-        "https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-003.jpg";
+        "https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/00/0F/ChMkJ1g1WYmIdjyuAAK2AFYZK9IAAYAlQPqRpkAArYY926.jpg";
     },
     changePic_c() {
       var pic = this.$refs.mainPic;
       pic.src =
-        "https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-004.jpg";
+        "https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/08/00/ChMkJlafMmeISJltAAZZgNeu0joAAHfJgJka8sABlmY195.jpg";
     },
     changePic_d() {
       var pic = this.$refs.mainPic;
       pic.src =
-        "https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-006.jpg";
+        "https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/02/0A/ChMkJ1bKz3GINVu7AA9Ylkt9unMAALJVQFmtbQAD1iu792.jpg";
     },
     changePic_e() {
       var pic = this.$refs.mainPic;
       pic.src =
-        "https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-005.jpg";
+        "https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/03/02/ChMkJ1v8-QGIZsfTAA3ESBvNf6UAAtapADL5CYADcRg723.jpg";
     },
     changePic_f() {
       var pic = this.$refs.mainPic;
       pic.src =
-        "https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-007.jpg";
+        "http://5b0988e595225.cdn.sohucs.com/images/20180419/247f318888a64c8f800d2343e4c066d6.jpeg";
     }
   },
 

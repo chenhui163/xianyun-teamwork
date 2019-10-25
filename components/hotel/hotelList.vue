@@ -52,7 +52,7 @@
                     </p>
                 </el-col>
                 <el-col class="info-price" :span="9">
-                    <div class="price-row" v-for="(v,i) in item.products" :key="i">
+                    <div class="price-row" v-for="(v,i) in item.products" :key="i" @click="handleJump">
                         <p>{{v.name}}</p>
                         <p>
                             <span class="price">￥{{v.price}}</span>起
@@ -89,6 +89,11 @@ export default {
                     id
                 }
             })
+        },
+
+        // 跳转到酒店网站
+        handleJump(){
+            this.$router.push("https://hotels.ctrip.com/international/1646544.html?isfull=F&cbn=77&ecp=3550&ep=601059138&sd=F&Currency=USD&Exchange=7.0691&MinPriceRoomShadowID=0&ti=110106-b557256e-c381-47ed-abff-26486ed29a88&pi=102102&tt=1571966822&NoShowSearchBox=T&listproductid=1646544&listismemberlogin=F&liststarttime=2019-10-26&listendtime=2019-10-27&listhasfilters=false&listdatetime=2019-10-25%2009:27:06&masterhotelid=1646544&hcityid=11080#ctm_ref=hi_0_0_0_0_lst_sr_2_df_ls_4_n_hi_0_0_0");
         }
     }
 
