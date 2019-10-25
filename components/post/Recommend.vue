@@ -2,7 +2,8 @@
   <div>
     <div class="card" @click="handlelink(posts.id)">
       <div class="card-img">
-        <img :src="this.posts.images[0]" />
+        <img :src="this.posts.images[0]" v-if="this.posts.images[0]" />
+        <img src="@/static/icon/timg.gif" v-else-if="!this.posts.images[0]">
       </div>
       <div class="card-info">
         <div class="title">{{posts.title}}</div>
@@ -42,6 +43,7 @@ export default {
   width: 100%;
   height: 80px;
   border-bottom: 1px solid #999;
+  cursor: pointer;
   .card-img {
     margin-right: 10px;
     img {

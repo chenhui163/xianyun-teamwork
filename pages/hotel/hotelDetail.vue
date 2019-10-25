@@ -1,6 +1,5 @@
 <template>
   <div class="main">
-
     <div class="hotel_address">
       <el-breadcrumb separator-class="el-icon-arrow-right" class="nav_bar">
         <el-breadcrumb-item :to="{ path: '/hotel?city=' +cityId }">酒店</el-breadcrumb-item>
@@ -10,7 +9,11 @@
 
       <div class="title">
         <span>{{hotelInfo.name}}</span>
-        <em class="iconfont">&#xe60e;</em><em class="iconfont">&#xe60e;</em><em class="iconfont">&#xe60e;</em><em class="iconfont">&#xe60e;</em><em class="iconfont">&#xe60e;</em>
+        <em class="iconfont">&#xe60e;</em>
+        <em class="iconfont">&#xe60e;</em>
+        <em class="iconfont">&#xe60e;</em>
+        <em class="iconfont">&#xe60e;</em>
+        <em class="iconfont">&#xe60e;</em>
         <br />
         <p>{{hotelInfo.alias}}</p>
         <br />
@@ -22,15 +25,30 @@
     <el-row type="flex" class="picture" v-if="hotelInfo.pics">
       <div class="picture_l">
         <!-- <img :src="$axios.defaults.baseURL + hotelInfo.pics[0].url"/> -->
-        <img src="https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-002.jpg" ref="mainPic"/>
+        <img
+          src="https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-002.jpg"
+          ref="mainPic"
+        />
       </div>
       <div class="picture_r">
-        <div @click="changePic_a"><img src="https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-002.jpg"/></div>
-        <div @click="changePic_b"><img src="https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-003.jpg"/></div>
-        <div @click="changePic_c"><img src="https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-004.jpg"/></div>
-        <div @click="changePic_d"><img src="https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-006.jpg"/></div>
-        <div @click="changePic_e"><img src="https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-005.jpg"/></div>
-        <div @click="changePic_f"><img src="https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-007.jpg"/></div>
+        <div @click="changePic_a">
+          <img src="https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-002.jpg" />
+        </div>
+        <div @click="changePic_b">
+          <img src="https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-003.jpg" />
+        </div>
+        <div @click="changePic_c">
+          <img src="https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-004.jpg" />
+        </div>
+        <div @click="changePic_d">
+          <img src="https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-006.jpg" />
+        </div>
+        <div @click="changePic_e">
+          <img src="https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-005.jpg" />
+        </div>
+        <div @click="changePic_f">
+          <img src="https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-007.jpg" />
+        </div>
       </div>
     </el-row>
 
@@ -43,22 +61,71 @@
       <a href="https://www.ctrip.com/">
         <div>{{hotelInfo.products[0].name}}</div>
         <div>{{hotelInfo.products[0].bestType}}</div>
-        <div><i>￥</i><span>{{hotelInfo.products[0].price}}</span> 起 <i class="el-icon-arrow-right"></i></div>
+        <div>
+          <i>￥</i>
+          <span>{{hotelInfo.products[0].price}}</span> 起
+          <i class="el-icon-arrow-right"></i>
+        </div>
       </a>
       <a href="http://www.elong.com/">
         <div>{{hotelInfo.products[1].name}}</div>
         <div>{{hotelInfo.products[1].bestType}}</div>
-        <div><i>￥</i><span>{{hotelInfo.products[1].price}}</span> 起 <i class="el-icon-arrow-right"></i></div>
+        <div>
+          <i>￥</i>
+          <span>{{hotelInfo.products[1].price}}</span> 起
+          <i class="el-icon-arrow-right"></i>
+        </div>
       </a>
       <a href="https://www.hotels.cn">
         <div>{{hotelInfo.products[2].name}}</div>
         <div>{{hotelInfo.products[2].bestType}}</div>
-        <div><i>￥</i><span>{{hotelInfo.products[2].price}}</span> 起 <i class="el-icon-arrow-right"></i></div>
+        <div>
+          <i>￥</i>
+          <span>{{hotelInfo.products[2].price}}</span> 起
+          <i class="el-icon-arrow-right"></i>
+        </div>
       </a>
     </el-row>
 
-    <div class="map">
-      <HotelMap :hotelInfo="hotelInfo"></HotelMap>
+    <div class="map_nav">
+      <div class="map">
+        <HotelMap></HotelMap>
+      </div>
+      
+      <div class="nav_m">
+        <div class="nav_top">
+          <!-- <span>风景</span><span>交通</span> -->
+          <span v-for="(item, index) in ['风景', '交通']"
+          :key="index"
+          @click="handleClick(index)"
+          :class="{active: current === index}"
+          >{{item}}</span>
+        </div>
+        <div class="nav_bottom" v-if="current === 0">
+          <span><i>世纪广场</i><i>0.96公里</i></span>
+          <span><i>文澜路广场</i><i>0.52公里</i></span>
+          <span><i>山羊公园</i><i>2.08公里</i></span>
+          <span><i>南京邮电信息无涯亭</i><i>0.90公里</i></span>
+          <span><i>南京财经大学仙林校区广场</i><i>0.47公里</i></span>
+          <span><i>敬文林</i><i>0.94公里</i></span>
+          <span><i>高觉敷</i><i>0.98公里</i></span>
+          <span><i>南京邮电大学仙林校区</i><i>0.89公里</i></span>
+          <span><i>仙林曼度广场</i><i>1.06公里</i></span>
+          <span><i>山羊湖公园</i><i>1.58公里</i></span>
+        </div>
+        <div class="nav_bottom" v-if="current === 1">
+          <span><i>仙林中心(地铁站)</i><i>0.82公里</i></span>
+          <span><i>大成名店(公交站)</i><i>0.10公里</i></span>
+          <span><i>大成名店公园停车场</i><i>0.04公里</i></span>
+          <span><i>学则路(地铁站)</i><i>1.26公里</i></span>
+          <span><i>金鹰奥莱城仙林店停车场</i><i>0.45公里</i></span>
+          <span><i>学津路(公交站)</i><i>0.29公里</i></span>
+          <span><i>南京财经大学(公交站)</i><i>0.32公里</i></span>
+          <span><i>山羊公园(地铁站)</i><i>0.37公里</i></span>
+          <span><i>杉湖西路(公交站)</i><i>0.61公里</i></span>
+          <span><i>学则路(地铁站)</i><i>0.00公里</i></span>
+        </div>
+      </div>
     </div>
 
     <el-row type="flex" class="hotel_info_two">
@@ -71,7 +138,9 @@
       </div>
       <div class="main_equipment">
         <div>主要设施</div>
-        <div><span>wifi</span></div>
+        <div>
+          <span>wifi</span>
+        </div>
       </div>
       <div class="park">
         <div>停车服务</div>
@@ -89,20 +158,28 @@
       </div>
       <el-row type="flex" class="num_code">
         <div class="num">
-          <div><span>总评分</span>：{{hotelInfo.all_remarks}}</div>
-          <div><span>好评数</span>：{{hotelInfo.good_remarks}}</div>
-          <div><span>差评数</span>：{{hotelInfo.bad_remarks}}</div>
+          <div>
+            <span>总评分</span>
+            ：{{hotelInfo.all_remarks}}
+          </div>
+          <div>
+            <span>好评数</span>
+            ：{{hotelInfo.good_remarks}}
+          </div>
+          <div>
+            <span>差评数</span>
+            ：{{hotelInfo.bad_remarks}}
+          </div>
         </div>
         <div class="code">
           <div class="code_one">
             <el-rate
-            v-model="hotelInfo.stars"
-            disabled
-            show-score
-            text-color="#ff9900"
-            score-template="{value}分"
-            >
-            </el-rate>
+              v-model="hotelInfo.stars"
+              disabled
+              show-score
+              text-color="#ff9900"
+              score-template="{value}分"
+            ></el-rate>
             <div class="shallow"></div>
             <div class="shallow_text">推荐</div>
           </div>
@@ -113,12 +190,11 @@
               <div>{{hotelInfo.scores.environment}}</div>
             </div>
             <el-progress
-            v-if="hotelInfo.scores" 
-            type="circle" 
-            :percentage="hotelInfo.scores.environment * 10" 
-            color="#ff9900"
-            >
-            </el-progress>
+              v-if="hotelInfo.scores"
+              type="circle"
+              :percentage="hotelInfo.scores.environment * 10"
+              color="#ff9900"
+            ></el-progress>
           </div>
 
           <div class="code_three" v-if="hotelInfo.scores">
@@ -126,13 +202,12 @@
               <div>产品</div>
               <div>{{hotelInfo.scores.product}}</div>
             </div>
-              <el-progress
-              v-if="hotelInfo.scores" 
-              type="circle" 
-              :percentage="hotelInfo.scores.product * 10" 
+            <el-progress
+              v-if="hotelInfo.scores"
+              type="circle"
+              :percentage="hotelInfo.scores.product * 10"
               color="#ff9900"
-              >
-              </el-progress>
+            ></el-progress>
           </div>
 
           <div class="code_four" v-if="hotelInfo.scores">
@@ -141,12 +216,11 @@
               <div>{{hotelInfo.scores.service}}</div>
             </div>
             <el-progress
-            v-if="hotelInfo.scores" 
-            type="circle" 
-            :percentage="hotelInfo.scores.service * 10" 
-            color="#ff9900"
-            >
-            </el-progress>
+              v-if="hotelInfo.scores"
+              type="circle"
+              :percentage="hotelInfo.scores.service * 10"
+              color="#ff9900"
+            ></el-progress>
           </div>
         </div>
       </el-row>
@@ -161,51 +235,63 @@ export default {
   data() {
     return {
       //酒店信息
-      hotelInfo:{},
-      cityId:""
-    }
+      hotelInfo: {},
+      cityId: "",
+      current: 0
+    };
   },
 
-  mounted(){
-    const {id, cityId} = this.$route.query
-    console.log(id, cityId)
+  mounted() {
+    const { id, cityId } = this.$route.query;
+    console.log(id, cityId);
     this.cityId = cityId;
 
     this.$axios({
-      url:"/hotels?id=" + id,
-    }).then(res =>{
-      this.hotelInfo = res.data.data[0]
-      console.log(this.hotelInfo)
+      url: "/hotels?id=" + id
+    }).then(res => {
+      this.hotelInfo = res.data.data[0];
+      console.log(this.hotelInfo);
 
-      localStorage.setItem('loc_one', this.hotelInfo.location.latitude);
-      localStorage.setItem('loc_two', this.hotelInfo.location.longitude);
-    })
+      localStorage.setItem("loc_one", this.hotelInfo.location.latitude);
+      localStorage.setItem("loc_two", this.hotelInfo.location.longitude);
+    });
   },
 
   methods: {
-    changePic_a(){
-      var pic = this.$refs.mainPic
-      pic.src = "https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-002.jpg" 
+    handleClick(index){
+      //点击时候改变current
+      this.current = index
+      
     },
-    changePic_b(){
-      var pic = this.$refs.mainPic
-      pic.src = "https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-003.jpg" 
+    changePic_a() {
+      var pic = this.$refs.mainPic;
+      pic.src =
+        "https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-002.jpg";
     },
-    changePic_c(){
-      var pic = this.$refs.mainPic
-      pic.src = "https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-004.jpg" 
+    changePic_b() {
+      var pic = this.$refs.mainPic;
+      pic.src =
+        "https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-003.jpg";
     },
-    changePic_d(){
-      var pic = this.$refs.mainPic
-      pic.src = "https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-006.jpg" 
+    changePic_c() {
+      var pic = this.$refs.mainPic;
+      pic.src =
+        "https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-004.jpg";
     },
-    changePic_e(){
-      var pic = this.$refs.mainPic
-      pic.src = "https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-005.jpg" 
+    changePic_d() {
+      var pic = this.$refs.mainPic;
+      pic.src =
+        "https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-006.jpg";
     },
-    changePic_f(){
-      var pic = this.$refs.mainPic
-      pic.src = "https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-007.jpg" 
+    changePic_e() {
+      var pic = this.$refs.mainPic;
+      pic.src =
+        "https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-005.jpg";
+    },
+    changePic_f() {
+      var pic = this.$refs.mainPic;
+      pic.src =
+        "https://img.ivsky.com/img/bizhi/pre/201601/04/guodegang_yuqian-007.jpg";
     }
   },
 
@@ -221,18 +307,18 @@ export default {
   margin: 20px auto;
   .hotel_address {
     /deep/.nav_bar {
-        margin-bottom: 20px;
+      margin-bottom: 20px;
     }
     .title {
-        margin-bottom: 35px;
+      margin-bottom: 35px;
       span {
         font-size: 26px;
       }
       em {
         color: #ff9900;
-        }
+      }
       i {
-          color: #666;
+        color: #666;
       }
       p {
         display: inline;
@@ -270,15 +356,15 @@ export default {
       }
     }
   }
-  .hotel_info{
+  .hotel_info {
     flex-direction: column;
     margin-bottom: 58px;
-    .info_title{
+    .info_title {
       display: flex;
       div {
         height: 60px;
         line-height: 60px;
-        color:#909399;
+        color: #909399;
         font-weight: 600;
         border-bottom: 1px solid #ccc;
         &:nth-child(1) {
@@ -293,7 +379,7 @@ export default {
         }
       }
     }
-    a{
+    a {
       display: block;
       width: 100%;
       height: 60px;
@@ -311,37 +397,74 @@ export default {
           width: 420px;
           padding-left: 15px;
           i {
-            color:#ff9b00;
+            color: #ff9b00;
           }
           span {
-            color:#ff9b00;
+            color: #ff9b00;
           }
         }
         &:nth-child(2) {
           width: 420px;
           i {
-            color:#ff9b00;
+            color: #ff9b00;
           }
           span {
-            color:#ff9b00;
+            color: #ff9b00;
           }
         }
         &:nth-child(3) {
           width: 160px;
           i {
-            color:#ff9b00;
+            color: #ff9b00;
           }
           span {
-            color:#ff9b00;
+            color: #ff9b00;
           }
         }
       }
     }
   }
-  .map {
-    margin-bottom: 45px;
-    width: 650px;
-    height: 360px;
+  .map_nav {
+    display: flex;
+    justify-content: space-between;
+    .map {
+      margin-bottom: 45px;
+      width: 650px;
+      height: 360px;
+    }
+    .nav_m {
+      width: 330px;
+      .nav_top {
+        padding: 10px 0;
+        border-bottom: 1px solid #ccc;
+        margin-bottom: 10px;
+        span {
+          color: #666;
+          font-size: 19px;
+          &:nth-child(1) {
+            margin-right: 40px;
+          }
+          &:hover {
+            color: #409eff;
+            cursor: pointer;
+          }
+        }
+      }
+      .nav_bottom {
+        height: 300px;
+        padding: 0 15px;
+        overflow-y:scroll;
+        span {
+          display: block;
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 21px;
+          font-size: 17px;
+          color: #666666;
+          cursor: pointer;
+        }
+      }
+    }
   }
   .hotel_info_two {
     flex-direction: column;
@@ -404,6 +527,7 @@ export default {
   }
 
   .comment {
+    margin-bottom: 58px;
     .num_code {
       .num {
         display: flex;
@@ -436,16 +560,16 @@ export default {
             border: 3px solid #ff9900;
             border-radius: 50%;
             left: -13px;
-            opacity:0.3; 
+            opacity: 0.3;
           }
           .shallow_text {
             position: absolute;
             font-size: 30px;
             color: #ff9900;
-            opacity:0.3;
-            left: 23px; 
+            opacity: 0.3;
+            left: 23px;
             z-index: -999;
-            transform: rotate(-30deg)
+            transform: rotate(-30deg);
           }
         }
         .code_two {
@@ -506,6 +630,11 @@ export default {
         }
       }
     }
+  }
+  .active{
+    color: #409eff !important;
+    border-bottom: 2px solid #409eff;
+    padding-bottom: 10px;
   }
 }
 </style>

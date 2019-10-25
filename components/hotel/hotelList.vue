@@ -99,7 +99,7 @@ export default {
 
     /* 酒店列表 */
     .hotel-list{
-        margin-bottom: 20px;
+        // margin-bottom: 20px;
         padding: 25px 0;
         border-bottom: 1px solid #eeeeee;
 

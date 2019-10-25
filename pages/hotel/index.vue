@@ -19,7 +19,7 @@
 
         <!-- 酒店列表 -->
         <HotelList  v-loading="loading" v-for="(item,index) in hotel" :key="index" :item="item" v-if="item.price <= filterPrice"/>
-
+        <div v-if="hotel.length==0" class="isEmpty">暂无符合条件的酒店</div>
         <!-- 分页 -->
         <!-- 
             size-change：改变当前页显示个数
@@ -61,7 +61,8 @@ export default {
             scenics: [], //城市景点数组
             city: ""  ,   //城市名称
             filterPrice:9999,
-            loading:true
+            loading:true,//加载效果
+            hotelCity:null
         }
 
     },
@@ -69,21 +70,28 @@ export default {
         this.getList()
         // console.log(this.hotel)
         // 请求旅游景点
-            this.$axios({
-                url: "/cities?name=" + this.$route.query.city
-            }).then(res=>{
-                // 将景点赋值到城市对象中
-                this.scenics = res.data.data[0].scenics; 
-                const city = res.data.data[0].id; 
-                console.log(res);
-                
-                this.$router.push({
-                    path:"/hotel",
-                    query:{
-                       city
-                    }
+            setTimeout(() => {
+                this.$axios({
+                    url: "/cities?name=" + this.hotelCity.real_city
+                }).then(res=>{
+                    // 将景点赋值到城市对象中
+                    console.log(res);
+
+                    this.scenics = res.data.data[0].scenics; 
+                    const city = res.data.data[0].id; 
+                    
+                    setTimeout(() => {
+                        this.$router.push({
+                            path:"/hotel",
+                            query:{
+                                city
+                            }
+                        })
+                    }, 200);
                 })
-            })
+
+            }, 200);
+            
     },
 
     watch:{
@@ -117,6 +125,8 @@ export default {
             const {data,total} = res.data
             this.hotel = [...data]   // 每次请求数据，酒店列表都会更新
             this.total = total
+            // console.log(this.hotel[0]);
+            this.hotelCity = this.hotel[0]
             console.log(this.hotel);
 
             setTimeout(() => {
@@ -167,8 +177,14 @@ export default {
 }
 
 /* 分页 */
-    .list-page{
-        margin-bottom: 50px;
-        text-align: right;
-    }
+.list-page{
+    margin-bottom: 50px;
+    text-align: right;
+}
+/** 没有符合条件的酒店时展示的空提醒的样式 */
+.isEmpty{
+    text-align: center;
+    height: 300px;
+    padding-top: 50px;
+}
 </style>

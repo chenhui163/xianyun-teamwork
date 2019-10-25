@@ -39,7 +39,12 @@
 
     <!-- 评论显示区域 -->
     <div class="comment_main">
-      <div class="comment_info" v-for="(item, index) in dataList" :key="index">
+      <div class="tips" v-if="comments.length===0">
+        <i class="iconfont">&#xe610;</i>
+        <span>快来留下你的足迹</span>
+        <i class="iconfont">&#xe610;</i>
+      </div>
+      <div class="comment_info" v-for="(item, index) in dataList" :key="index" v-else-if="comments">
         <div class="comment_user">
           <img
             :src="$axios.defaults.baseURL + item.account.defaultAvatar"
@@ -66,6 +71,7 @@
           <em @click="handleReply(item)">回复</em>
         </div>
       </div>
+      
     </div>
 
     <!-- 分页功能 -->
@@ -116,10 +122,6 @@ export default {
       const post = this.$route.query.id;
       this.$axios({
         url: "/posts/comments?post=" + post
-        // params: {
-        //   _start: this.pageIndex-1,
-        //   _limit: this.pageSize
-        // }
       }).then(res => {
         const { data } = res.data;
         this.comments = data;
@@ -127,19 +129,15 @@ export default {
         for (let key in data) {
           data[key].datatime = moment(data.created_up).format("YYYY-MM-DD");
         }
-        console.log(this.comments);
       });
     },
     handleClose() {
       this.replyComment = null;
     },
     handleSuccess(res, file) {
-      console.log(res);
       this.pics.push(res[0]);
     },
-    handleRemove(fileList) {
-      console.log(this.pics);
-    },
+    handleRemove(fileList) {},
 
     // 提交评论
     async Submit() {
@@ -164,7 +162,6 @@ export default {
         data
       });
 
-      console.log(res.data);
       if (res.data.status === 0) {
         this.$message.success("提交成功");
       }
@@ -202,6 +199,11 @@ export default {
   },
   mounted() {
     this.getdatalist();
+  },
+  watch: {
+    $route() {
+      this.getdatalist();
+    }
   }
 };
 </script>
@@ -235,7 +237,7 @@ export default {
     margin-bottom: 10px;
   }
   .comment_main {
-    border: 1px solid #999;
+    border: 1px solid rgba(204, 203, 203, 0.541);
     .comment_info {
       // margin-top: 20px;
       padding: 10px;
@@ -268,8 +270,9 @@ export default {
         .pics {
           display: flex;
           img {
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
+            padding-right: 10px;
           }
         }
         em {
@@ -278,6 +281,14 @@ export default {
           color: #666;
           cursor: pointer;
         }
+      }
+    }
+    .tips {
+      font-size: 20px;
+      margin-left: 35%;
+    color: #ffa90b;
+      i{
+        font-size: 20px;
       }
     }
   }

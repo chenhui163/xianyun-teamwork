@@ -148,7 +148,7 @@ export default {
     },
     mounted(){
         // 请求旅游景点
-        this.getTravel();
+        // this.getTravel();
     },
     methods: {
 
