@@ -162,7 +162,7 @@ export default {
                     const { total, data } = res.data;
                     
                     // 将数据发送回父组件
-                    this.$emit("getFilterHotelList", data);
+                    this.$emit("getFilterHotelList", data,total,str);
                 })
             }
         }

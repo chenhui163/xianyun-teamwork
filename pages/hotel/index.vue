@@ -62,7 +62,8 @@ export default {
             city: ""  ,   //城市名称
             filterPrice:9999,
             loading:true,//加载效果
-            hotelCity:null
+            hotelCity:null,
+            str:''
         }
 
     },
@@ -115,7 +116,7 @@ export default {
         },
         getList(){
             this.$axios({
-            url:'hotels',
+            url:'hotels'+this.str,
             params:{
                 ...this.$route.query,
                 _start:(this.pageIndex-1)*this.pageSize,
@@ -128,7 +129,7 @@ export default {
             // console.log(this.hotel[0]);
             this.hotelCity = this.hotel[0]
             this.city = this.hotel[0].city.name;
-            console.log(this.hotelCity);
+            console.log(this.hotel);
 
             setTimeout(() => {
                 this.loading = false
@@ -142,8 +143,10 @@ export default {
             this.city = `${city}市`;
         },
         //筛选酒店列表
-        getFilterHotelList(data){
+        getFilterHotelList(data,total,str){
             this.hotel = data
+            this.total = total
+            this.str = str
         },
         getFilterPrice(filterPrice){
             this.filterPrice = filterPrice

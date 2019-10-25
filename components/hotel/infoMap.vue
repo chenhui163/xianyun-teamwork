@@ -134,7 +134,7 @@ export default {
             /* 地图部分js代码 */
             var map = new AMap.Map('container', {
                 resizeEnable: true,
-                center:[this.hotel[2].location.longitude, this.hotel[2].location.latitude],  // 中心点坐标
+                center:[this.hotel[0].location.longitude, this.hotel[0].location.latitude],  // 中心点坐标
                 zoom:8
             });
 
