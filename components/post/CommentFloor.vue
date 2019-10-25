@@ -12,7 +12,7 @@
             v-if="data.account.defaultAvatar"
           />
           <span>{{data.account.nickname}}</span>
-          <span>{{data.created_at}}</span>
+          <span>2019-10-25</span>
           <span class="level">{{data.level}}</span>
         </div>
 

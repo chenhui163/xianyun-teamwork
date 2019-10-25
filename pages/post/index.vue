@@ -153,7 +153,7 @@
         :key="index"
         v-if="dataList[index].images.length <=0"
       >
-        <div style="margin-left: 15px;">
+        <div style="margin-left: 30px;">
           <a href="javascript:;">
             <h3
               style="color:#000;"
