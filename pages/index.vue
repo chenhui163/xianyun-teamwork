@@ -92,7 +92,13 @@ export default {
             
         },
         handleCheckPrice(){
+            if(!this.search){
+                this.$message('请输入城市名称');
+                return
+            }
+
             if(this.options[this.current].type==="酒店"){
+
                 
                 this.$axios({
                     url:'/cities?name='+this.search,
@@ -110,9 +116,7 @@ export default {
                     })
                 })
             }
-            
-        },
-         handleCheckPrice(){
+
             if(this.options[this.current].type==="攻略"){
                 this.$axios({
                     url:'/cities?name='+this.search,
@@ -127,8 +131,7 @@ export default {
                     })
                 })
             }
-            
-        }
+        },
     }
 
 }
