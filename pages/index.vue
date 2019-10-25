@@ -110,6 +110,23 @@ export default {
                 })
             }
             
+        },
+         handleCheckPrice(){
+            if(this.options[this.current].type==="攻略"){
+                this.$axios({
+                    url:'/cities?name='+this.search,
+                }).then(res=>{
+                    this.searchReturn = res.data.data
+                    const city = this.searchReturn[0].name.replace('市','')
+                    this.$router.push({
+                        path:"/post",
+                        query:{
+                            city
+                        }
+                    })
+                })
+            }
+            
         }
     }
 

@@ -197,7 +197,6 @@ export default {
     }).then(res => {
       const { data ,total } = res.data
       this.list = data
-      console.log(this.list);
           data.map(v => {
             v.value = v.cityName.replace("市", "")
             this.citys.push(v)
@@ -228,7 +227,6 @@ watch:{
     },
     // 点击跳转ID
     handleID(id,watch){
-      // console.log(++watch);
       this.$router.push({
         path:`post/detail`,
         query:{
