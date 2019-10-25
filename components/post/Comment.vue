@@ -39,8 +39,12 @@
 
     <!-- 评论显示区域 -->
     <div class="comment_main">
-      
-      <div class="comment_info" v-for="(item, index) in dataList" :key="index" v-if="comments">
+      <div class="tips" v-if="comments.length===0">
+        <i class="iconfont">&#xe610;</i>
+        <span>快来留下你的足迹</span>
+        <i class="iconfont">&#xe610;</i>
+      </div>
+      <div class="comment_info" v-for="(item, index) in dataList" :key="index" v-else-if="comments">
         <div class="comment_user">
           <img
             :src="$axios.defaults.baseURL + item.account.defaultAvatar"
@@ -67,7 +71,7 @@
           <em @click="handleReply(item)">回复</em>
         </div>
       </div>
-    
+      
     </div>
 
     <!-- 分页功能 -->
@@ -133,9 +137,7 @@ export default {
     handleSuccess(res, file) {
       this.pics.push(res[0]);
     },
-    handleRemove(fileList) {
-      
-    },
+    handleRemove(fileList) {},
 
     // 提交评论
     async Submit() {
@@ -198,9 +200,9 @@ export default {
   mounted() {
     this.getdatalist();
   },
-  watch:{
-    $route(){
-      this.getdatalist()
+  watch: {
+    $route() {
+      this.getdatalist();
     }
   }
 };
@@ -281,9 +283,13 @@ export default {
         }
       }
     }
-    .tips{
-      font-size: 15px;
-      color: #666;
+    .tips {
+      font-size: 20px;
+      margin-left: 35%;
+    color: #ffa90b;
+      i{
+        font-size: 20px;
+      }
     }
   }
 }
