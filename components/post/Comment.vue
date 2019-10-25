@@ -46,10 +46,10 @@
       </div>
       <div class="comment_info" v-for="(item, index) in dataList" :key="index" v-else-if="comments">
         <div class="comment_user">
-          <img
+          <!-- <img
             :src="$axios.defaults.baseURL + item.account.defaultAvatar"
             v-if="item.account.defaultAvatar"
-          />
+          /> -->
           <span>{{item.account.nickname}}</span>
           <span class="time">{{item.datatime}}</span>
           <span class="level">{{item.level}}</span>
@@ -141,6 +141,10 @@ export default {
 
     // 提交评论
     async Submit() {
+      if(this.content===""){
+        this.$message.error("评论不能为空")
+        return
+      }
       // 准备数据
       const data = {
         content: this.content,
@@ -170,6 +174,7 @@ export default {
       }, 200);
       this.content = "";
       this.$refs.upload.clearFiles();
+      this.pics = [];
     },
 
     handleSizeChange(val) {

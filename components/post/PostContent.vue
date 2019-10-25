@@ -9,7 +9,7 @@
     <div class="option">
       <div class="option-item">
         <i class="iconfont icontuding">&#xe60d;</i>
-        <p>评论()</p>
+        <p>评论</p>
       </div>
       <div class="star option-item" @click="handlestar(posts.id)"
       :class="{active:star.indexOf(posts.id)>-1}"
@@ -57,7 +57,7 @@ export default {
       }).then(res => {
         this.posts = res.data;
         this.star  =JSON.stringify(res.data.account.starPosts) 
-
+        console.log(this.posts.comments.length)
       });
     },
     // 收藏功能
