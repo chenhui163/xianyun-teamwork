@@ -43,6 +43,7 @@ export default {
     Comment,
     Recommend
   },
+  
   data() {
     return {
       recommend: {},

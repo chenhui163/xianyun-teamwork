@@ -141,6 +141,10 @@ export default {
 
     // 提交评论
     async Submit() {
+      if(this.content===""){
+        this.$message.error("评论不能为空")
+        return
+      }
       // 准备数据
       const data = {
         content: this.content,
