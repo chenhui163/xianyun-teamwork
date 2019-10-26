@@ -9,7 +9,7 @@
         </div>
 
         <!-- 目的地酒店搜索工具栏 -->
-        <SearchBar @getCityScenics="getCityScenics"/>
+        <SearchBar @getCityScenics="getCityScenics" @clearStr="clearStr"/>
 
         <!-- 介绍信息&地图组件 -->
         <InfoMap :scenics="scenics" :hotel="hotel"/>
@@ -63,7 +63,8 @@ export default {
             filterPrice:9999,
             loading:true,//加载效果
             hotelCity:null,
-            str:''
+            str:'',
+            form:{}
         }
 
     },
@@ -143,13 +144,17 @@ export default {
             this.city = `${city}市`;
         },
         //筛选酒店列表
-        getFilterHotelList(data,total,str){
+        getFilterHotelList(data,total,str,form){
             this.hotel = data
             this.total = total
             this.str = str
+            this.form = form
         },
         getFilterPrice(filterPrice){
             this.filterPrice = filterPrice
+        },
+        clearStr(){
+            this.str = ''
         }
     },
     // 注册

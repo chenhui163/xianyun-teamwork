@@ -205,6 +205,8 @@ export default {
                     city:this.form.city.id
                 }
             })
+
+            this.$emit('clearStr')
         },
 
         // 目的地输入框失去焦点时触发
@@ -260,6 +262,8 @@ export default {
                 path:"/hotel",
                 query
             })
+
+            this.$emit('clearStr')
         }
     }
 };

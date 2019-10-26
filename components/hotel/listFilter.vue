@@ -165,6 +165,15 @@ export default {
                     this.$emit("getFilterHotelList", data,total,str);
                 })
             }
+        },
+        $route(){
+            this.form = {
+                price: 4000,
+                levels: [], // 酒店等级
+                types: [], // 酒店类型
+                assets: [], // 酒店设施
+                brands: [] // 酒店品牌
+            }
         }
     },
     methods: {},
