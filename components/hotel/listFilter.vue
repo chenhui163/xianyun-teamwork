@@ -3,10 +3,10 @@
         <div class="price">
             <el-row class="price-title">
                 <el-col :span="12">价格</el-col>
-                <el-col :span="12" style="text-align: right;">0-{{this.form.price}}</el-col>
+                <el-col :span="12" style="text-align: right;">0-{{this.price}}</el-col>
             </el-row>
 
-            <el-slider v-model="form.price" :max="4000"></el-slider>
+            <el-slider v-model="price" :max="4000" @change="handleChange"></el-slider>
         </div>
 
         <div class="hotel-grade">
@@ -116,16 +116,13 @@ export default {
                 assets: [], // 酒店设施
                 brands: [] // 酒店品牌
             },
+            price: 4000,
             hotel_grade: "不限",
             filter:{},
             
         };
     },
     watch:{
-        // 监听预算价格
-        'form.price'(){
-            this.$emit("getFilterPrice",this.form.price);
-        },
         form:{
             deep:true,
             handler(){
@@ -151,7 +148,9 @@ export default {
                 if (theFilterOptions.brands.length > 0) {
                     str += "&hotelbrand_in=" + theFilterOptions.brands.join("&hotelbrand_in=");
                 }
-                
+
+                // 判断酒店价格
+                str += "&price_lt=" + theFilterOptions.price
 
                 str = `?city=${this.$route.query.city}` + str;
 
@@ -176,7 +175,12 @@ export default {
             }
         }
     },
-    methods: {},
+    methods: {
+        // 价格滑块松开时触发
+        handleChange(){
+            this.form.price = this.price
+        }
+    },
     mounted(){
         this.$axios({
             url:'/hotels/options',

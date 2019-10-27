@@ -15,10 +15,10 @@
         <InfoMap :scenics="scenics" :hotel="hotel"/>
 
         <!-- 酒店列表过滤器 -->
-        <ListFilter @getFilterHotelList="getFilterHotelList" @getFilterPrice="getFilterPrice" />
+        <ListFilter @getFilterHotelList="getFilterHotelList"/>
 
         <!-- 酒店列表 -->
-        <HotelList  v-loading="loading" v-for="(item,index) in hotel" :key="index" :item="item" v-if="item.price <= filterPrice"/>
+        <HotelList  v-loading="loading" v-for="(item,index) in hotel" :key="index" :item="item"/>
         <div v-if="hotel.length==0" class="isEmpty">暂无符合条件的酒店</div>
         <!-- 分页 -->
         <!-- 
@@ -60,7 +60,6 @@ export default {
             hotel:[],       // 酒店列表
             scenics: [], //城市景点数组
             city: ""  ,   //城市名称
-            filterPrice:9999,
             loading:true,//加载效果
             hotelCity:null,
             str:'',
@@ -149,9 +148,6 @@ export default {
             this.total = total
             this.str = str
             this.form = form
-        },
-        getFilterPrice(filterPrice){
-            this.filterPrice = filterPrice
         },
         clearStr(){
             this.str = ''
